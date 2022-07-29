@@ -59,7 +59,6 @@ def main():
     platicts = ["acrylate", "acrylate copolymer", "styrene copolymer", "polyethylene", "polymethyl methacrylate",
             "polyethylene terephthalate", "nylon"]
     cmr = ["cyclotetrasiloxane", "phmb", "polyaminopropyl biguanide", "p-aminophenol"]
-    # from cosmEthics app: C13-15 Alkane
 
     ingredients = get_ingredients()
 
