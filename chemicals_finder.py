@@ -14,7 +14,7 @@ def get_ingredients():
         .replace("[", "").replace("]", "")\
         .replace("+", "").replace("-", "").replace("/", ",")\
         .replace("may contain", ",")\
-        .replace(".", "").replace("•", ",").replace("●", ",").replace(":", "").split(",")
+        .replace(".", "").replace("•", ",").replace("●", ",").replace("·", ",").replace(":", "").split(",")
 
     for i in range(0, len(ingredients)):
         ingredients[i] = ingredients[i].strip()
@@ -59,6 +59,7 @@ def main():
     platicts = ["acrylate", "acrylate copolymer", "styrene copolymer", "polyethylene", "polymethyl methacrylate",
             "polyethylene terephthalate", "nylon"]
     cmr = ["cyclotetrasiloxane", "phmb", "polyaminopropyl biguanide", "p-aminophenol"]
+    # from cosmEthics app: C13-15 Alkane
 
     ingredients = get_ingredients()
 
