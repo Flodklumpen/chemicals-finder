@@ -62,16 +62,17 @@ function App() {
           {resultData && (
             <div className="result">
               <div className="header-small">
-                <p>Din produkt innehåller:</p>
+                <p>Innehållet gav {resultData.exact_match.number} utslag</p>
               </div>
 
               <div className="exact-wrapper">
                 <div className="exact-container">
-                  <h4>Exakta matchningar: {resultData.exact_match.number}</h4>
                   <div className="exact-entry-container">
                     {resultData.exact_match.pfas.length !== 0 && (
                       <div>
-                        PFAS änmen:
+                        <div className="entry-header">
+                          PFAS änmen:
+                        </div>
                         {Object.keys(resultData.exact_match.pfas).map((key) => (
                           <div key={key} className="exact-entries">
                             {resultData.exact_match.pfas[key]}
@@ -81,7 +82,9 @@ function App() {
                     )}
                     {resultData.exact_match.hormone.length !== 0 && (
                       <div>
+                        <div className="entry-header">
                           Hormonstörande ämnen:
+                        </div>
                         {Object.keys(resultData.exact_match.hormone).map((key) => (
                           <div key={key} className="exact-entries">
                             {resultData.exact_match.hormone[key]}
@@ -91,7 +94,9 @@ function App() {
                     )}
                     {resultData.exact_match.plastic.length !== 0 && (
                       <div>
-                        Plaster:
+                        <div className="entry-header">
+                          Plaster:
+                        </div>
                         {Object.keys(resultData.exact_match.plastic).map((key) => (
                           <div key={key} className="exact-entries">
                             {resultData.exact_match.plastic[key]}
@@ -101,8 +106,9 @@ function App() {
                     )}
                     {resultData.exact_match.cmr.length !== 0 && (
                       <div>
-                          Ämnen som kan orsaka cancer, genmutationer eller störa
-                          förmågan att få barn (CMR-ämnen):
+                        <div className="entry-header">
+                          CMR-ämnen (cancerframkallande, könscellsmutagent eller reproduktionsstörande):
+                        </div>
                           {Object.keys(resultData.exact_match.cmr).map((key) => (
                             <div key={key} className="exact-entries">
                               {resultData.exact_match.cmr[key]}
@@ -114,34 +120,72 @@ function App() {
                 </div>
               </div>
 
-              <div className="partly-container">
-                <p>Delvis matchningar: {resultData.partly_match.number}</p>
-                {resultData.partly_match.pfas.original && (
-                  <div className="partly">
-                    <p>Du skrev in: {resultData.partly_match.pfas.original}</p>
-                    <p>PFAS änmen som delvis matchade: {resultData.partly_match.pfas.matching}</p>
+              {/*<div className="partly-wrapper">
+                <div className="partly-container">
+                  <div className="sub-header">
+                    Delvis matchningar: {resultData.partly_match.number}
                   </div>
-                )}
-                {resultData.partly_match.hormone.original && (
-                  <div className="partly">
-                    <p>Du skrev in: {resultData.partly_match.hormone.original}</p>
-                    <p>Hormonstörande ämnen som delvis matchade: {resultData.partly_match.hormone.matching}</p>
+                  <div className="partly-entry-container">
+                    {resultData.partly_match.pfas.original.length !== 0 && (
+                      <div>
+                        <div>
+                          Du skrev in:
+                        </div>
+                        {Object.keys(resultData.partly_match.pfas.original).map((key) => (
+                          <div key={key} className="partly-entries">
+                            {resultData.partly_match.pfas.original[key]}
+                          </div>
+                        ))}
+                        <div>
+                          PFAS änmen som delvis matchade:
+                        </div>
+                        {Object.keys(resultData.partly_match.pfas.matching).map((key) => (
+                          <div key={key} className="partly-entries">
+                            {resultData.partly_match.pfas.matching[key]}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {resultData.partly_match.hormone.original.length !== 0 && (
+                      <div>
+                        <div className="partly-entries">
+                          <div>
+                            Du skrev in:
+                          </div>
+                          {Object.keys(resultData.partly_match.hormone.original).map((key) => (
+                            <div key={key}>
+                              {resultData.partly_match.hormone.original[key]}
+                            </div>
+                          ))}
+                        </div>
+                        <div className="partly-entries">
+                          <div>
+                            Hormonstörande änmen som delvis matchade:
+                          </div>
+                          {Object.keys(resultData.partly_match.hormone.matching).map((key) => (
+                            <div key={key}>
+                              {resultData.partly_match.hormone.matching[key]}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {resultData.partly_match.plastic.original.length !== 0 && (
+                      <div className="partly">
+                        <p>Du skrev in: {resultData.partly_match.plastic.original}</p>
+                        <p>Plastämnen som delvis matchade: {resultData.partly_match.plastic.matching}</p>
+                      </div>
+                    )}
+                    {resultData.partly_match.cmr.original.length !== 0 && (
+                      <div className="partly">
+                        <p>Du skrev in: {resultData.partly_match.cmr.original}</p>
+                        <p>Ämnen som kan orsaka cancer, genmutationer eller störa
+                          förmågan att få barn (CMR-ämnen) som delvis matchade: {resultData.partly_match.cmr.matching}</p>
+                      </div>
+                    )}
                   </div>
-                )}
-                {resultData.partly_match.plastic.original && (
-                  <div className="partly">
-                    <p>Du skrev in: {resultData.partly_match.plastic.original}</p>
-                    <p>Plastämnen som delvis matchade: {resultData.partly_match.plastic.matching}</p>
-                  </div>
-                )}
-                {resultData.partly_match.cmr.original && (
-                  <div className="partly">
-                    <p>Du skrev in: {resultData.partly_match.cmr.original}</p>
-                    <p>Ämnen som kan orsaka cancer, genmutationer eller störa
-                      förmågan att få barn (CMR-ämnen) som delvis matchade: {resultData.partly_match.cmr.matching}</p>
-                  </div>
-                )}
-              </div>
+                </div>
+              </div>*/}
 
             </div>
           )}

@@ -47,6 +47,16 @@
 .header-small {
   background-color: pink;
   width: 100%;
+  font-size: 18px;
+}
+
+.sub-header {
+  font-size: 20px;
+}
+
+.entry-header {
+  font-size: 18px;
+  margin-bottom: 0.1rem;
 }
 
 form {
@@ -79,6 +89,7 @@ form {
   display: flex;
   flex-direction: column;
   margin: 1rem;
+  row-gap: 1rem;
 }
 
 .exact-entry-container {
@@ -92,16 +103,33 @@ form {
 
 }
 
-.partly-container {
+/*.partly-wrapper {
   background-color: pink;
+  display: flex;
   width: 100%;
 }
 
-.partly {
+.partly-container {
+  background-color: pink;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  margin: 1rem;
+  row-gap: 1rem;
 }
+
+.partly-entry-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 1rem;
+}
+
+.partly-entries {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}*/
 
 .App-link {
   color: #61dafb;

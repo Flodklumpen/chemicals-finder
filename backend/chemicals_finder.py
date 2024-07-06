@@ -13,7 +13,8 @@ def sort_ingredients_list(ingredients):
         .replace("[", "").replace("]", "") \
         .replace("+", "").replace("-", "").replace("/", ",") \
         .replace("may contain", ",") \
-        .replace(".", "").replace("•", ",").replace("●", ",").replace("·", ",").replace(":", "").split(",")
+        .replace(".", "").replace("•", ",").replace("●", ",").replace("·", ",").replace(":", "")\
+        .rstrip(',').split(",")
 
     for i in range(0, len(ingredients)):
         ingredients[i] = ingredients[i].strip()
@@ -23,23 +24,33 @@ def sort_ingredients_list(ingredients):
     return ingredients
 
 
-def check_ingredients(ingredients, i_type):
+def check_ingredients(ingredients, i_type_list):
     """
     Check if ingredients list contains chemicals in i_type list and returns a list of the matching chemicals.
     :param ingredients: list
-    :param i_type: list
+    :param i_type_list: list
     :return: list
     """
     res = []
     exact = []
     original = []
 
-    for t in i_type:
+    for ing in ingredients:
+        if "perfluoro" in ing or "fluoro" in ing:
+            exact.append(ing)
+
+    for ingr in exact:
+        ingredients.remove(ingr)
+
+    for t in i_type_list:
         if t in ingredients:
             exact.append(t)
         else:
             for i in ingredients:
                 if t in i:
+                    res.append(t)
+                    original.append(i)
+                elif i in t:
                     res.append(t)
                     original.append(i)
     return [exact, original, res]
@@ -49,15 +60,18 @@ def find_chemicals(ingredients):
     """
     Finds out if a product contains harmful chemicals.
     """
-    pfas = ["ptfe", "polytef", "c9-15", "c8-18", "fluoroalcohol phosphate", "decafluoropentane",
-            "dimethiconol fluoroalcohol dilinoleic acid", "trifluoropropyl dimethiconol", "octafluoropentyl methacrylate"
-                                                                                          "perfluoro", "polyfluoro"]
+    pfas = ["ptfe", "polytef", "polytefum", "c9-15", "c8-18", "fluoroalcohol phosphate", "decafluoropentane",
+            "dimethiconol fluoroalcohol dilinoleic acid", "trifluoropropyl dimethiconol",
+            "octafluoropentyl methacrylate", "polyfluoro", "c9-15 fluoroalcohol phosphate",
+            "ammonium c6-16 perfluoroalkylethyl phosphate", "polyperfluoroethoxymethoxy difluoroethyl peg phosphat",
+            "polyperfluoromethylisopropyl ether", "perfluorooctyl triethoxysilane", "FTOH", "FTS", "PFOA",
+            "Fluortensider", "PFCA", "PFHxA"]
     hormone = ["benzophenone-1", "benzophenone-3", "bha", "bht", "butylparaben", "cyclomethicone", "cyclotetrasiloxane",
                "dimethylcyclosiloxane", "ethylhexyl methoxycinnamate", "propylparaben", "resorcinol", "triclosan",
-               "triphenyl phosphate"]
+               "triphenyl phosphate", "etylhexyl methoxycinnamate", "recorcinol"]
     plastics = ["acrylate", "acrylate copolymer", "styrene copolymer", "polyethylene", "polymethyl methacrylate",
                 "polyethylene terephthalate", "nylon"]
-    cmr = ["cyclotetrasiloxane", "phmb", "polyaminopropyl biguanide", "p-aminophenol"]
+    cmr = ["phmb", "polyaminopropyl biguanide", "p-aminophenol"]
 
     ingredients = sort_ingredients_list(ingredients)
 
@@ -69,10 +83,10 @@ def find_chemicals(ingredients):
     exact_match_nr = len(pfas_res[0]) + len(hormone_res[0]) + len(plastic_res[0]) + len(cmr_res[0])
 
     partly_match_nr = len(pfas_res[2]) + len(hormone_res[2]) + len(plastic_res[2]) + len(cmr_res[2])
-    pm_pfas = {"original": ", ".join([p for p in pfas_res[1]]), "matching": ", ".join([p for p in pfas_res[2]])}
-    pm_hormone = {"original": ", ".join([h for h in hormone_res[1]]), "matching": ", ".join([h for h in hormone_res[2]])}
-    pm_plastic = {"original": ", ".join([p for p in plastic_res[1]]), "matching": ", ".join([p for p in plastic_res[2]])}
-    pm_cmr = {"original": ", ".join([c for c in cmr_res[1]]), "matching": ", ".join([c for c in cmr_res[2]])}
+    pm_pfas = {"original": pfas_res[1], "matching": pfas_res[2]}
+    pm_hormone = {"original": hormone_res[1], "matching": hormone_res[2]}
+    pm_plastic = {"original": plastic_res[1], "matching": plastic_res[2]}
+    pm_cmr = {"original": cmr_res[1], "matching": cmr_res[2]}
 
     return {"exact_match":
                 {"number": exact_match_nr,
