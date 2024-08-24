@@ -25,17 +25,23 @@
 }
 
 .body-wrapper {
-  background-color: #282c34;
+  background-color: beige;
   min-height: 90vh;
   display: flex;
+  justify-content: center;
 }
 
 .App-body {
-  background-color: #282c34;
+  background-color: beige;
   color: white;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
   margin: 1rem;
-  column-gap: 1rem;
+  gap: 2rem;
+  max-width: 1200px;
   width: 100%;
 }
 
@@ -60,13 +66,17 @@
 }
 
 form {
-  width: 30%;
+  width: 90%;
+  max-width: 500px;
+  height: 20rem;
 }
 
 .input-textarea {
   width: 100%;
-  height: 35%;
+  height: 100%;
   box-sizing: border-box;
+  resize: none;
+  font-size: 1rem;
 }
 
 .result {
@@ -74,7 +84,8 @@ form {
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
-  width: 30%;
+  width: 90%;
+  max-width: 500px;
 }
 
 .exact-wrapper {
@@ -99,47 +110,16 @@ form {
   row-gap: 1rem;
 }
 
-.exact-entries {
-
-}
-
-/*.partly-wrapper {
-  background-color: pink;
-  display: flex;
-  width: 100%;
-}
-
-.partly-container {
-  background-color: pink;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-  row-gap: 1rem;
-}
-
-.partly-entry-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  row-gap: 1rem;
-}
-
-.partly-entries {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
-}*/
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Larger screen styles */
+@media (min-width: 768px) {
+  .App-body {
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    align-content: flex-start;
   }
-  to {
-    transform: rotate(360deg);
+  
+  form, .result {
+    width: 45%;
   }
 }

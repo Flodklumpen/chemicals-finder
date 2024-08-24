@@ -64,11 +64,11 @@ def find_chemicals(ingredients):
             "dimethiconol fluoroalcohol dilinoleic acid", "trifluoropropyl dimethiconol",
             "octafluoropentyl methacrylate", "polyfluoro", "c9-15 fluoroalcohol phosphate",
             "ammonium c6-16 perfluoroalkylethyl phosphate", "polyperfluoroethoxymethoxy difluoroethyl peg phosphat",
-            "polyperfluoromethylisopropyl ether", "perfluorooctyl triethoxysilane", "FTOH", "FTS", "PFOA",
-            "Fluortensider", "PFCA", "PFHxA"]
+            "polyperfluoromethylisopropyl ether", "perfluorooctyl triethoxysilane", "ftoh", "fts", "pfoa",
+            "fluortensider", "pfca", "pfhxa"]
     hormone = ["benzophenone-1", "benzophenone-3", "bha", "bht", "butylparaben", "cyclomethicone", "cyclotetrasiloxane",
                "dimethylcyclosiloxane", "ethylhexyl methoxycinnamate", "propylparaben", "resorcinol", "triclosan",
-               "triphenyl phosphate", "etylhexyl methoxycinnamate", "recorcinol"]
+               "triphenyl phosphate", "recorcinol"]
     plastics = ["acrylate", "acrylate copolymer", "styrene copolymer", "polyethylene", "polymethyl methacrylate",
                 "polyethylene terephthalate", "nylon"]
     cmr = ["phmb", "polyaminopropyl biguanide", "p-aminophenol"]

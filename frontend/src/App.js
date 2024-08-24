@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Form from 'react-bootstrap/Form';
 
 /*
 * test data
 * bha, bht, phmb, ptfe, polytef, acrylate, nylon, cyclotetrasiloxane
+* bha, bht, phmb, ptfe, polytef, acrylate, nylon, cyclotetrasiloxane, ethylhexyl methoxycinnamate, p-aminophenol, polyaminopropyl biguanide, benzophenone-3, recorcinol, PFCA, PFHxA, Fluortensider, pfoa, fts, ftoh, trifluoropropyl dimethiconol
 * */
 
 function App() {
@@ -17,7 +20,6 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-    console.log('Form submitted with input:', inputValue);
 
     try {
       const response = await fetch(`chemicals?input=${encodeURIComponent(inputValue)}`, {
@@ -49,16 +51,20 @@ function App() {
   return (
     <div className="App">
       <div className="App-header">
+        Koll på ditt Innehåll
       </div>
       <div className="body-wrapper">
         <div className="App-body">
-          <form onSubmit={handleSubmit}>
-          <textarea className="input-textarea"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    onKeyDown={handleKeyDown}
-          />
-          </form>
+          <Form onSubmit={handleSubmit}>
+            <Form.Control
+              as="textarea"
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+              placeholder="Skriv ingredienslistan här"
+              className="input-textarea"
+            />
+          </Form>
           {resultData && (
             <div className="result">
               <div className="header-small">
@@ -119,74 +125,6 @@ function App() {
                   </div>
                 </div>
               </div>
-
-              {/*<div className="partly-wrapper">
-                <div className="partly-container">
-                  <div className="sub-header">
-                    Delvis matchningar: {resultData.partly_match.number}
-                  </div>
-                  <div className="partly-entry-container">
-                    {resultData.partly_match.pfas.original.length !== 0 && (
-                      <div>
-                        <div>
-                          Du skrev in:
-                        </div>
-                        {Object.keys(resultData.partly_match.pfas.original).map((key) => (
-                          <div key={key} className="partly-entries">
-                            {resultData.partly_match.pfas.original[key]}
-                          </div>
-                        ))}
-                        <div>
-                          PFAS änmen som delvis matchade:
-                        </div>
-                        {Object.keys(resultData.partly_match.pfas.matching).map((key) => (
-                          <div key={key} className="partly-entries">
-                            {resultData.partly_match.pfas.matching[key]}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {resultData.partly_match.hormone.original.length !== 0 && (
-                      <div>
-                        <div className="partly-entries">
-                          <div>
-                            Du skrev in:
-                          </div>
-                          {Object.keys(resultData.partly_match.hormone.original).map((key) => (
-                            <div key={key}>
-                              {resultData.partly_match.hormone.original[key]}
-                            </div>
-                          ))}
-                        </div>
-                        <div className="partly-entries">
-                          <div>
-                            Hormonstörande änmen som delvis matchade:
-                          </div>
-                          {Object.keys(resultData.partly_match.hormone.matching).map((key) => (
-                            <div key={key}>
-                              {resultData.partly_match.hormone.matching[key]}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    {resultData.partly_match.plastic.original.length !== 0 && (
-                      <div className="partly">
-                        <p>Du skrev in: {resultData.partly_match.plastic.original}</p>
-                        <p>Plastämnen som delvis matchade: {resultData.partly_match.plastic.matching}</p>
-                      </div>
-                    )}
-                    {resultData.partly_match.cmr.original.length !== 0 && (
-                      <div className="partly">
-                        <p>Du skrev in: {resultData.partly_match.cmr.original}</p>
-                        <p>Ämnen som kan orsaka cancer, genmutationer eller störa
-                          förmågan att få barn (CMR-ämnen) som delvis matchade: {resultData.partly_match.cmr.matching}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>*/}
-
             </div>
           )}
         </div>
@@ -194,8 +132,6 @@ function App() {
 
       <div className="App-footer">
       </div>
-
-      {/*<img src={logo} className="App-logo" alt="logo" />*/}
     </div>
   );
 }
