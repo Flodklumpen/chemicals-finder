@@ -11,7 +11,7 @@ def sort_ingredients_list(ingredients):
         .replace("(", ",").replace(")", ",") \
         .replace(",,", ",").replace(", ,", ",") \
         .replace("[", "").replace("]", "") \
-        .replace("+", "").replace("-", "").replace("/", ",") \
+        .replace("+/-", "").replace("/", ",") \
         .replace("may contain", ",") \
         .replace(".", "").replace("•", ",").replace("●", ",").replace("·", ",").replace(":", "")\
         .rstrip(',').split(",")
